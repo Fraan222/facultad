@@ -1,0 +1,33 @@
+%HECHOS
+%Pedidos.Código de ticket Código de cliente FechaConsumo
+% Lista de cafés del tiquet
+ticket(t1,cli1,fecha(30,5,2023),si,['R', 'E']).
+
+ticket(t2,cli2,fecha(30,5,2023),no,['R']).
+
+ticket(t3,cli3,fecha(30,5,2023),si,['L']).
+
+ticket(t4,cli1,fecha(31,5,2023),no,['L','L','E']).
+
+ticket(t5,cli1,fecha(31,5,2023),no,['L','E','E','R']).
+
+ticket(t6,cli2,fecha(31,5,2023),no,['R','E','R']).
+
+café('R','Ristretto',290).
+
+café('E','Espresso',320).
+
+café('L','Lungo',450).
+
+cliente(cli1,'Lara','Cárcano').
+
+cliente(cli2,'Tina','Moreno').
+
+cliente(cli3,'Laura','Garzón').
+
+regla1(Codigo, Nombre, Apellido, Dia, Mes, Consumo) :- ticket(Codigo, CodCliente,fecha(Dia,Mes,_),Consumo,_), cliente(CodCliente, Nombre, Apellido).
+
+regla2(Cantidad, Lista) :- findall(Codigos,(ticket(Codigos,_,_,Consumicion,Consumos),Consumicion == 'no',length(Consumos,CantConsumos), CantConsumos >= Cantidad ) ,Lista).
+
+
+
